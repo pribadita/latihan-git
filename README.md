@@ -1,4 +1,0 @@
-# latihan-git
-
-hello
-yuiyui
