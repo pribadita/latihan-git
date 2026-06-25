@@ -68,3 +68,15 @@ console.log(peserta)
 console.log("Setelah Splice")
 peserta.splice(1,2,"Tri")
 console.log(peserta)
+
+var arr = ["Jeruk","Mangga","Apel","Strawberry","Pisang"]
+for (var i = 0; i < arr.length; i++){
+    console.log(arr[i])
+}
+
+var names = ["John", "Doe", "Jack"]
+var i = 0
+while(i < names.length){
+    console.log(names[i])
+    i++
+}
