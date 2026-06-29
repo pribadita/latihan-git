@@ -9,7 +9,7 @@
 var orang = [
 {
     nama : "Yul",
-    warnaKulit : "Sawo Matang",
+    this.warnaKulit : "Sawo Matang",
     jenisKelamin : "Perempuan",
     tinggiBadan : 185,
     beratBadan : 70,

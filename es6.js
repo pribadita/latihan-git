@@ -79,7 +79,7 @@
 
 // desctruring Array
 let number = [6,4,7,8,5]
-// let [num1, , , , lastNum] = [1,5,6,7,8]
+let [num1, , , , lastNum] = [1,5,6,7,8]
 
 // console.log(lastNum)
 
@@ -99,8 +99,8 @@ let number = [6,4,7,8,5]
 // Rest Parameter Array
 // let [num1, num2, num3 ,num4 , lastNum] = [1,5,6,7,8]
 
-// let footballers = ["Messi", "Ronaldo", "Mbappe", "Halland","Neymar"]
-// let [foot1,...restFoots] = footballers
+let footballers = ["Messi", "Ronaldo", "Mbappe", "Halland","Neymar"]
+let [foot1,...restFoots] = footballers
 
 // console.log(foot1)
 // // console.log(foot2)
