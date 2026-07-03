@@ -34,7 +34,6 @@ const getMovieById = (req, res) => {
 
 const getMovieApi = (req, res) => {
     let {title} = req.query
-    console.log(title)
     if(title == undefined){
         title = ""
     }
@@ -52,6 +51,26 @@ const getMovieByIdApi = (req, res) => {
     res.json(result)
 }
 
+const loggerMiddleware = (req, res, next) => {
+    console.log("Ada Request Masuk")
+    console.log(`Method : ${req.method}`)
+    console.log(`URL : ${req.url}`)
+    next()
+}
+
+const tokenMiddleware = (req, res, next) =>{
+    let {token} = req.query
+
+    if (token == 1234) {
+        next()
+    }else{
+        res.status(401).json({
+            message: "Token Tidak Valid"
+        })
+    }
+}
+
+
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
@@ -59,7 +78,7 @@ app.get('/', (req, res) => {
 app.get('/movies', getMovie)
 app.get('/movies/:id', getMovieById)
 
-app.get('/api/movies', getMovieApi)
+app.get('/api/movies', loggerMiddleware, tokenMiddleware, getMovieApi)
 app.get('/api/movies/:id', getMovieByIdApi)
 
 app.listen(port, () => {
