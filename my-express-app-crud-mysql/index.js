@@ -1,3 +1,4 @@
+// require('dotenv').config()
 const express = require('express');
 const movieRouter  = require('./src/routes/movieRouter');
 const app = express();
