@@ -136,7 +136,6 @@ const createMovie = (req, res) => {
     let {title, year} = req.body
     let queryText = `INSERT INTO tb_movie(title_tb_movie, year_tb_movie)
                     VALUES ("${title}", ${year})`
-
     connectionPool.query(queryText, (err, data) => {
         if(err){
             console.log(err)
