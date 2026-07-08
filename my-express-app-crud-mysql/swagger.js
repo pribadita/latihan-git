@@ -19,11 +19,6 @@ const doc = {
             }
         }
     }
-//     security : [
-//         {
-//             bearerAuth:[]
-//     }
-// ]
 }
 
 const outputFile = './swagger-output.json'
