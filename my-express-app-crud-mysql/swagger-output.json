@@ -202,7 +202,7 @@
     }
   },
   "components": {
-    "SecuritySchemes": {
+    "securitySchemes": {
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
@@ -214,5 +214,10 @@
         "description": "any description..."
       }
     }
-  }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
 }

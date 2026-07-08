@@ -12,7 +12,7 @@ const doc = {
     consumes: ['application/json'],
     produces: ['application/json'],
     components: {
-        SecuritySchemes:{
+        securitySchemes:{
             bearerAuth:{
                 type: 'http',
                 scheme: 'bearer'
@@ -24,7 +24,12 @@ const doc = {
             description: "any description..."
         }
         }
+    },
+    security : [
+        {
+            bearerAuth:[]
     }
+]
 }
 
 const outputFile = './swagger-output.json'
