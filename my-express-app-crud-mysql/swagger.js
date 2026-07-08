@@ -18,7 +18,12 @@ const doc = {
                 scheme: 'bearer'
             }
         }
+    },
+    security : [
+        {
+            bearerAuth:[]
     }
+]
 }
 
 const outputFile = './swagger-output.json'
