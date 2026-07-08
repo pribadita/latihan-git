@@ -8,9 +8,6 @@
   "servers": [
     {
       "url": "http://localhost:3000/"
-    },
-    {
-      "url": "https://localhost:3000/"
     }
   ],
   "paths": {
@@ -206,18 +203,7 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
-      },
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "X-API-KEY",
-        "description": "any description..."
       }
     }
-  },
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ]
+  }
 }

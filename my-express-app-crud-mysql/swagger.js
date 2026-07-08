@@ -8,7 +8,7 @@ const doc = {
     },
     host: "localhost:3000",
     basePath: "/",
-    schemes: ['http', 'https'],
+    // schemes: ['http', 'https'],
     consumes: ['application/json'],
     produces: ['application/json'],
     components: {
@@ -16,20 +16,14 @@ const doc = {
             bearerAuth:{
                 type: 'http',
                 scheme: 'bearer'
-            },
-            apiKeyAuth:{
-            type: "apiKey",
-            in: "header",       // can be "header", "query" or "cookie"
-            name: "X-API-KEY",  // name of the header, query parameter or cookie
-            description: "any description..."
+            }
         }
-        }
-    },
-    security : [
-        {
-            bearerAuth:[]
     }
-]
+//     security : [
+//         {
+//             bearerAuth:[]
+//     }
+// ]
 }
 
 const outputFile = './swagger-output.json'
