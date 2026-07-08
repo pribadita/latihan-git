@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken')
+const { authPlugins } = require('mysql2')
 require('dotenv').config()
 
 const authJWT = (req, res, next) => {
     const authHeader = req.header('Authorization')
-
+    console.log(authHeader)
     if(!authHeader){
         res.setHeader('WWW-Authenticate','bearer')
 
@@ -15,7 +16,7 @@ const authJWT = (req, res, next) => {
 
     // console.log(authHeader)
     const token = authHeader.split(" ")[1]
-    console.log(token)
+    // console.log(token)
     if(!token){
         return res.status(401).json({
             Status : "Ditolak",
