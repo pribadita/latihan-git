@@ -1,0 +1,27 @@
+.p2
+{
+            background-color: yellow;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 20pt;
+            text-align: justify;
+}
+
+p
+{
+            background-color: red;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 20pt;
+            text-align: justify;
+
+}
+
+img{
+    width: 1000px;
+    height: 500px;
+}
+
+div{
+    height: 100px;
+    width: 100px;
+    background-color: aqua;
+}
