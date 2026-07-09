@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            border: 1px solid red;
+        }
+         /* nav {
+            border: 1px solid red;
+         }
+         div{
+            border: 1px solid red;
+         } */
+
+         .container{
+            display: flex;
+            justify-content: space-around;
+            height: 200px;
+            align-items: center;
+         }
+
+         div{
+            /* margin-right: 50px; */
+            padding: 10px;  
+         }
+
+         /* div:hover {
+            background-color: red;
+            padding: 20px ;
+         } */
+
+         input:focus {
+            background-color: red;
+            padding: 20px ;
+         }
+
+         a:active{
+            background-color: yellow;
+         }
+        
+         a:visited{
+            background-color: darkgray;
+         }
+
+         a:link{
+            background-color: green;
+         }
+    </style>
+</head>
+<body>
+    <nav class="container">
+        <div>Home</div>
+        <div>Search</div>
+        <div>Logout</div>
+
+        <input type="text">
+
+        <a href="./profile.html">Profile</a>
+        <a href="https://youtube.com">youtube</a>
+
+    </nav>
+</body>
+</html>
