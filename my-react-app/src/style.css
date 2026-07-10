@@ -1,0 +1,14 @@
+.card {
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    padding:20px;
+}
+
+.container{
+    /* display: flex; 
+    justify-content: center; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+}
