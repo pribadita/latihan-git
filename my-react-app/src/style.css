@@ -1,14 +1,17 @@
-.card {
-    border: 1px solid #cccccc;
+h1{
+    color:red
+}
+
+.card{
+    border: 2px solid red;
     border-radius: 20px;
-    padding:20px;
 }
 
 .container{
-    /* display: flex; 
-    justify-content: center; */
+    /* border: 10px solid black; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 20px;
     row-gap: 20px;
+    padding: 20px;
 }
