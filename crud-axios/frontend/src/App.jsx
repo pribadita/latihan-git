@@ -1,120 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useEffect, useState } from 'react'
 import './App.css'
+import './style.css'
+import axios from 'axios'
+import baseUrl from './config/utils'
 
 function App() {
-  const [count, setCount] = useState(0)
+const initialState = {movieTitle:"", movieYear:0}
+const [data, setData] = useState([])
+const [input, setInput] = useState(initialState)
+
+const ambilData = () => {
+  axios.get(`${baseUrl}/api/movie`).then((res)=>{
+        setData(res.data)
+      })
+}
+
+const handleSubmit = async (event) => {
+  event.preventDefault()
+  try{
+    // console.log(input)
+    await axios.post(`${baseUrl}/api/movie`,{title: input.movieTitle, year: Number(input.movieYear)})
+    ambilData()
+    setInput(initialState)
+  }catch(err){
+    alert(err)
+  }
+  
+}
+
+const handleChange = (event) => {
+  let {name, value} = event.target
+  setInput({...input, [name]: value})
+}
+
+  useEffect(()=>{
+    ambilData()
+  },[])
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <h1>CRUD AXIOS</h1>
+      <div className='div-form-input'>
+        <form action="/action_page.php" onSubmit={handleSubmit}>
+          <label htmlFor="movieTitle">Movie Title</label>
+          <input onChange={handleChange} type="text" id="movieTitle" name="movieTitle" />
 
-      <div className="ticks"></div>
+          <label htmlFor="movieYear">Movie Year</label>
+          <input onChange={handleChange} type="number" id="movieYear" name="movieYear" />
+          
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {data.map((item,index)=>{
+                    return (
+                      <tr key={index}>
+                        <td>{index+1}</td>
+                        <td>{item.title_tb_movie}</td>
+                        <td>{item.year_tb_movie}</td>
+                        <td>Delete</td>
+                    </tr>
+                    )
+                  })}
+                </tbody>
+            </table>
     </>
   )
 }

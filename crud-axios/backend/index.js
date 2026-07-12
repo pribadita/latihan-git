@@ -8,7 +8,7 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger-output.json')
 
 var corsOptions = {
-origin: 'http://localhost:3000',
+origin: 'http://localhost:5173',
 optionsSuccessStatus: 200
 }
 
