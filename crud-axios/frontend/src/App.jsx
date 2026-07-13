@@ -33,6 +33,15 @@ const handleChange = (event) => {
   setInput({...input, [name]: value})
 }
 
+const handleDelete = async (id) => {
+  try{
+  await axios.delete(`${baseUrl}/api/movie/${id}`)
+  ambilData()
+  }catch(err){
+    alert(err)
+  }
+}
+
   useEffect(()=>{
     ambilData()
   },[])
@@ -69,7 +78,14 @@ const handleChange = (event) => {
                         <td>{index+1}</td>
                         <td>{item.title_tb_movie}</td>
                         <td>{item.year_tb_movie}</td>
-                        <td>Delete</td>
+                        <td>
+                          <button onClick={()=>{
+                            if(confirm("Anda Yakin Menghapus Film Ini?")){
+                              handleDelete(item.id_tb_movie)
+                          }}
+                          }>Delete</button>
+                          <button>Edit</button>  
+                        </td>
                     </tr>
                     )
                   })}

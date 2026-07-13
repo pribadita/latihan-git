@@ -124,7 +124,7 @@ const readMovieById = (req, res) => {
 
     connectionPool.query(queryText, (err, data) => {
         if(err){
-            console.err(err)
+            console.error(err)
             return
         }
 
