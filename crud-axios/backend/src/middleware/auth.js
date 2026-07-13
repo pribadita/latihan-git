@@ -4,7 +4,6 @@ require('dotenv').config()
 
 const authJWT = (req, res, next) => {
     const authHeader = req.header('Authorization')
-    console.log(authHeader)
     if(!authHeader){
         res.setHeader('WWW-Authenticate','bearer')
 
