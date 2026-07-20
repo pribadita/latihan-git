@@ -3,7 +3,12 @@ import { use, useEffect, useState } from "react";
 
 const CrudAxios = () => {
   const [data, setData] = useState([]);
-  const [input, setInput] = useState({ movieTitle: "", movieYear: 0 });
+  // const [input, setInput] = useState({ movieTitle: "", movieYear: "" });
+  const [input, setInput] = useState({
+    movieTitle: "",
+    movieYear: "",
+    movieId: null,
+  });
 
   const fetchData = () => {
     axios.get("http://localhost:3000/api/movie").then((res) => {
@@ -14,11 +19,19 @@ const CrudAxios = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/movie", {
-        title: input.movieTitle,
-        year: input.movieYear,
-      });
+      if (input.movieId) {
+        await axios.put(`http://localhost:3000/api/movie/${input.movieId}`, {
+          title: input.movieTitle,
+          year: input.movieYear,
+        });
+      } else {
+        await axios.post("http://localhost:3000/api/movie", {
+          title: input.movieTitle,
+          year: input.movieYear,
+        });
+      }
       fetchData();
+      setInput({ movieTitle: "", movieYear: "", movieId: null });
     } catch (err) {
       console.error(err);
     }
@@ -40,8 +53,18 @@ const CrudAxios = () => {
 
   const handleEdit = async (id) => {
     try {
+      // console.log(id);
       let respond = await axios.get(`http://localhost:3000/api/movie/${id}`);
-      console.log(respond);
+      // console.log(respond.data[0]);
+      let {
+        id_tb_movie: movieId,
+        title_tb_movie: movieTitle,
+        year_tb_movie: movieYear,
+      } = respond.data[0];
+      // console.log(title_tb_movie);
+      // console.log(year_tb_movie);
+      setInput({ movieId, movieTitle, movieYear });
+      // console.log(input);
     } catch (err) {
       alert(err);
     }
@@ -49,7 +72,8 @@ const CrudAxios = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+    console.log(input);
+  }, [input]);
 
   return (
     <>
@@ -64,6 +88,7 @@ const CrudAxios = () => {
             placeholder="Input Your Movie Title.."
             onChange={handleChange}
             required
+            value={input.movieTitle}
           />
 
           <label htmlFor="movieYear">Movie Year</label>
@@ -74,6 +99,7 @@ const CrudAxios = () => {
             placeholder="Input Movie Year.."
             onChange={handleChange}
             required
+            value={input.movieYear}
           />
 
           <input type="submit" value="Submit" />
@@ -110,7 +136,7 @@ const CrudAxios = () => {
                     <button
                       className="bt-edit"
                       onClick={() => {
-                        handleEdit(item.id_table_Movie);
+                        handleEdit(item.id_tb_movie);
                       }}
                     >
                       Edit
