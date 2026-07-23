@@ -1,15 +1,12 @@
 import "./App.css";
 import "./style.css";
 
-import Home from "./pages/Home";
-import CrudAxios from "./pages/CrudAxios";
+import MainRouter from "./router/MainRouter";
 
-function App() {
+export default function App() {
   return (
     <>
-      <CrudAxios></CrudAxios>
+      <MainRouter></MainRouter>
     </>
   );
 }
-
-export default App;
