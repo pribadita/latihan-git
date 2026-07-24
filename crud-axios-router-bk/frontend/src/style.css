@@ -67,7 +67,8 @@
 }
 
 .div-input-movie input[type="text"],
-.div-input-movie input[type="number"] {
+.div-input-movie input[type="number"],
+.div-input-movie select {
   width: 100%;
   padding: 12px;
   margin: 8px 0;

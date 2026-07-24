@@ -3,18 +3,37 @@ import { use, useEffect, useState } from "react";
 import baseUrl from "../config/utils";
 
 const CrudAxios = () => {
-  const [data, setData] = useState([]);
-  // const [input, setInput] = useState({ movieTitle: "", movieYear: "" });
-  const [input, setInput] = useState({
+  const initialInput = {
     movieTitle: "",
     movieYear: "",
     movieId: null,
-  });
+    categoryId: "",
+  };
 
-  const fetchData = () => {
-    axios.get(`${baseUrl}/api/movie`).then((res) => {
-      setData(res.data);
-    });
+  const [data, setData] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [input, setInput] = useState(initialInput);
+
+  const fetchDataMovie = () => {
+    axios
+      .get(`${baseUrl}/api/movie`)
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const fetchDataCategory = () => {
+    axios
+      .get(`${baseUrl}/api/category`)
+      .then((res) => {
+        setCategory(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleSubmit = async (event) => {
@@ -24,15 +43,17 @@ const CrudAxios = () => {
         await axios.put(`${baseUrl}/api/movie/${input.movieId}`, {
           title: input.movieTitle,
           year: input.movieYear,
+          catId: input.categoryId,
         });
       } else {
         await axios.post(`${baseUrl}/api/movie`, {
           title: input.movieTitle,
           year: input.movieYear,
+          catId: input.categoryId,
         });
       }
-      fetchData();
-      setInput({ movieTitle: "", movieYear: "", movieId: null });
+      fetchDataMovie();
+      setInput(initialInput);
     } catch (err) {
       console.error(err);
     }
@@ -46,7 +67,7 @@ const CrudAxios = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${baseUrl}/api/movie/${id}`);
-      fetchData();
+      fetchDataMovie();
     } catch (err) {
       alert(err);
     }
@@ -54,25 +75,22 @@ const CrudAxios = () => {
 
   const handleEdit = async (id) => {
     try {
-      // console.log(id);
       let respond = await axios.get(`${baseUrl}/api/movie/${id}`);
-      // console.log(respond.data[0]);
       let {
         id_tb_movie: movieId,
         title_tb_movie: movieTitle,
         year_tb_movie: movieYear,
+        id_category: categoryId,
       } = respond.data[0];
-      // console.log(title_tb_movie);
-      // console.log(year_tb_movie);
-      setInput({ movieId, movieTitle, movieYear });
-      // console.log(input);
+      setInput({ movieId, movieTitle, movieYear, categoryId });
     } catch (err) {
       alert(err);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchDataMovie();
+    fetchDataCategory();
   }, []);
 
   return (
@@ -102,6 +120,24 @@ const CrudAxios = () => {
             value={input.movieYear}
           />
 
+          <label htmlFor="categoryId">Category</label>
+          <select
+            id="categoryId"
+            name="categoryId"
+            onChange={handleChange}
+            value={input.categoryId}
+            required
+          >
+            <option value="">-- Pilih Category --</option>;
+            {category.map((category, index) => {
+              return (
+                <option value={category.id_tb_category} key={index}>
+                  {category.name_tb_category}
+                </option>
+              );
+            })}
+          </select>
+
           <input type="submit" value="Submit" />
         </form>
       </div>
@@ -112,6 +148,7 @@ const CrudAxios = () => {
               <th>No</th>
               <th>Title</th>
               <th>Year</th>
+              <th>Category</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -122,6 +159,7 @@ const CrudAxios = () => {
                   <td>{index + 1}</td>
                   <td>{item.title_tb_movie}</td>
                   <td>{item.year_tb_movie}</td>
+                  <td>{item.name_tb_category}</td>
                   <td>
                     <button
                       className="bt-del"
